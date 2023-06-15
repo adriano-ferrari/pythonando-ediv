@@ -3,5 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path('register/', views.register, name='register')
+    # /auth/register
+    path('register/', views.register, name='register'),
+    # /auth/active_account/xyz/xyz...
+    path('active_account/<uidb4>/<token>', views.active_account, name='active_account')
 ]

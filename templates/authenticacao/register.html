@@ -1,0 +1,20 @@
+{% extends 'base_templates/authentication_base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/authenticacao.css' %}">
+{% endblock head %}
+
+{% block body %}
+    <div class="container">
+        <div class="box">
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <h2>Cadastre-se</h2>
+                <hr>
+                {{ register_form.as_p }}
+                <input type="submit" value="Enviar" class="btn btn-main">
+            </form>
+        </div>
+    </div>
+{% endblock body %}

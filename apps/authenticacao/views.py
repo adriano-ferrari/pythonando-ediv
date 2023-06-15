@@ -12,8 +12,14 @@ def register(request: HttpRequest) -> HttpResponse:
         register_form = RegisterForm(request.POST)
 
         if register_form.is_valid():
-            register_form.save()
+            form_new = register_form.save(commit=False)
+            form_new.is_active = False
+            form_new.save()
             # TODO: redirecionar para login
             return HttpResponse('Salvo com sucesso!')
         else:
-            return render(request, 'register.html', {'register_form': register_form})
+            return render(request, 'authenticacao/register.html', {'register_form': register_form})
+
+
+def active_account(request, uidb4, token):
+    return HttpResponse(token)

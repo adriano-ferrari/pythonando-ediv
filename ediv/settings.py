@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import sys
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ SECRET_KEY = 'django-insecure-nm0(ri8a=96x5*k8=mgjij#7g$i6e5)u3cgs6zb!5u9pva4flx
 DEBUG = True
 
 ALLOWED_HOSTS = []
+DOMAIN = config('DOMAIN', cast=str)
 
 
 # Application definition
@@ -138,8 +140,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Auth
-
 AUTH_USER_MODEL = 'authenticacao.Users'
 AUTHENTICATION_BACKENDS = (
     'authenticacao.backends.CustomBackend',
 )
+
+
+# Email
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # TODO: Configurar o envio de emails
+    pass
+
